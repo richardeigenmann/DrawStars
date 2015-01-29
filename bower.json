@@ -1,0 +1,21 @@
+{
+  "name": "DrawStars",
+  "version": "0.0.1",
+  "authors": [
+    "Richard Eigenmann <richard.eigenmann@gmail.com>"
+  ],
+  "description": "An AngularJS directive to draw stars",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~2.6.2"
+  }
+}

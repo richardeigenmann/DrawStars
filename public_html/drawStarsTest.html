@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="drawStarsTest">
+    <head>
+        <title>Test Page for drawing stars</title>
+        <meta charset="UTF-8">
+    </head>
+    <body >
+        <div ng-controller="Controller">
+            <!-- Taking stars from a variable in the $scope -->
+            4 Stars: <drawstars stars="stars4"></drawstars>
+            3 Stars: <drawstars stars="stars3"></drawstars>
+            2 Stars: <drawstars stars="stars2"></drawstars>
+            1 Stars: <drawstars stars="stars1"></drawstars>
+            0 Stars: <drawstars stars="stars0"></drawstars>
+            <hr>
+
+            <!-- Taking stars from a constant value and defining maxstars --> 
+            4/4 Stars: <drawstars stars="4" maxstars="4"></drawstars>
+            3/4 Stars: <drawstars stars="3" maxstars="4"></drawstars>
+            2/4 Stars: <drawstars stars="2" maxstars="4"></drawstars>
+            1/4 Stars: <drawstars stars="1" maxstars="4"></drawstars>
+            0/4 Stars: <drawstars stars="0" maxstars="4"></drawstars>
+
+            <hr>
+            <!-- Trying it out with 5 stars -->
+            5/5 Stars: <drawstars stars="5" maxstars="5"></drawstars>
+            4/5 Stars: <drawstars stars="4" maxstars="5"></drawstars>
+            3/5 Stars: <drawstars stars="3" maxstars="5"></drawstars>
+            2/5 Stars: <drawstars stars="2" maxstars="5"></drawstars>
+            1/5 Stars: <drawstars stars="1" maxstars="5"></drawstars>
+            0/5 Stars: <drawstars stars="0" maxstars="5"></drawstars>
+
+            <hr>
+            <!-- Trying it with 2 stars -->
+            2/2 Stars: <drawstars stars="2" maxstars="2"></drawstars>
+            1/2 Stars: <drawstars stars="1" maxstars="2"></drawstars>
+            0/2 Stars: <drawstars stars="0" maxstars="2"></drawstars>
+
+            <hr>
+            <!-- wrong but works anyway -->
+            2/2 Stars: <drawstars stars="4" maxstars="2"></drawstars>
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+        <script src="drawStars.js"></script>
+        <script>
+            angular.module('drawStarsTest', ['drawStars'])
+                    .controller('Controller', ['$scope', function Controller($scope) {
+                            $scope.stars5 = "5";
+                            $scope.stars4 = "4";
+                            $scope.stars3 = "3";
+                            $scope.stars2 = "2";
+                            $scope.stars1 = "1";
+                            $scope.stars0 = "0";
+                        }
+                    ])
+                    ;
+
+        </script>
+    </body>
+</html>
