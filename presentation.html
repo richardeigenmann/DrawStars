@@ -51,28 +51,28 @@
                 </section>
 
                 <section>
-                    <h2>Different Stars</h2>
-                    <canvas id="canvas1" width="200" height="200"></canvas>
-                    <canvas id="canvas2" width="200" height="200"></canvas>
-                    <canvas id="canvas3" width="200" height="200"></canvas>
-                    <canvas id="canvas4" width="200" height="200"></canvas>
+                    <h2>Different Stars (Js)</h2>
+                    <canvas id="canvas1" width="172" height="171"></canvas>
+                    <canvas id="canvas2" width="172" height="171"></canvas>
+                    <canvas id="canvas3" width="172" height="171"></canvas>
+                    <canvas id="canvas4" width="172" height="171"></canvas>
                     <p>4,5,6 and 25 point stars</p>
                     <script type="text/javascript">
                         var ctx1 = document.getElementById("canvas1").getContext("2d");
                         ctx1.fillStyle = "gold";
-                        star(ctx1, 100, 100, 85, 4, 0.5);
+                        star(ctx1, 85, 85, 85, 4, 0.5);
 
                         var ctx2 = document.getElementById("canvas2").getContext("2d");
                         ctx2.fillStyle = "gold";
-                        star(ctx2, 100, 100, 85, 5, 0.5);
+                        star(ctx2, 85, 85, 85, 5, 0.5);
 
                         var ctx3 = document.getElementById("canvas3").getContext("2d");
                         ctx3.fillStyle = "gold";
-                        star(ctx3, 100, 100, 85, 6, 0.5);
+                        star(ctx3, 85, 85, 85, 6, 0.5);
 
                         var ctx4 = document.getElementById("canvas4").getContext("2d");
                         ctx4.fillStyle = "gold";
-                        star(ctx4, 100, 100, 85, 35, 0.5);
+                        star(ctx4, 85, 85, 85, 35, 0.5);
 
 
                         function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
@@ -95,6 +95,16 @@
                     </script>
 
                 </section>
+
+                <section>
+                    <h2>Different Stars (AngularJs)</h2>
+                    <drawstars maxstars="1" points="4" radius="85"></drawstars>
+                    <drawstars maxstars="1" points="5" radius="85"></drawstars>
+                    <drawstars maxstars="1" points="6" radius="85"></drawstars>
+                    <drawstars maxstars="1" points="25" radius="85"></drawstars>
+                    <p>4,5,6 and 25 point stars</p>
+                </section>
+
 
                 <section>
                     <h2>The Math</h2>
@@ -326,8 +336,8 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
     ctx.restore();
 }
 </code></pre>
-                    
-                   <pre><code class="javascript">function drawStars(stars, maxStars, onColor, offColor, ctx) {
+
+                    <pre><code class="javascript">function drawStars(stars, maxStars, onColor, offColor, ctx) {
     ctx.fillStyle = offColor;
     for (var i = maxStars; i > 0; i--) {
         if (stars >= i) {
@@ -377,12 +387,12 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                 </section>
 
                 <section>
-                    <h2>2 way data binding</h2>
+                    <h2>AngularJS data binding</h2>
                     <div ng-controller="StarsSliderController">
-                        <label for="slider-onstars">OnStars: </label>
-                        <input id="slider-onstars" type="range" min="1" max="21"  ng-model='onStars' list="slider-stars-ticks">
+                        <label for="slider-onstars">onStars: </label>
+                        <input id="slider-onstars" type="range" min="0" max="21"  ng-model='onStars' list="slider-stars-ticks">
                         <p></p>
-                        <label for="slider-maxstars">MaxStars: </label>
+                        <label for="slider-maxstars">maxStars: </label>
                         <input id="slider-maxstars" type="range" min="1" max="21" ng-model='maxStars' list="slider-stars-ticks">
                         <datalist id="slider-stars-ticks">
                             <option>1</option>
@@ -398,7 +408,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             <option>21</option>
                         </datalist>
                         <p>Stars: {{onStars}}/{{maxStars}}</p>
-                        <drawstars stars="onStars" maxstars="maxStars"></drawstars>
+                        <drawstars stars="{{onStars}}" maxstars="{{maxStars}}"></drawstars>
                     </div>
                 </section>
 
@@ -407,8 +417,68 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
 
                 <section>
                     <h2>Speed comparisons</h2>
-                    <p>Compare javascript canvas painting with rotations and stuff vs. direct pixel exact coordinates.</p>
-                    <p>Perhaps have a race?</p>
+                    <div style="display:inline-block">
+                        <p>parametrised stars</p>
+                        <canvas id="speedCanvas1" width="200" height="200"></canvas>
+                        <p id="ms1"></p>
+                    </div>
+                    <div style="display:inline-block;margin: 50px" ></div>
+                    <div style="display:inline-block">
+                        <p>10px hard coded stars</p>
+                        <canvas id="speedCanvas2" width="200" height="200"></canvas>
+                        <p id="ms2"></p>
+                    </div>
+
+                    <script type="text/javascript">
+                        var speedContext1 = document.getElementById("speedCanvas1").getContext("2d");
+
+                        var count=0;
+                        var start1 = performance.now();
+                        for (var r = 0; r < 256; r++) {
+                            for (var row = 0; row < 10; row++) {
+                                for (var col = 0; col < 10; col++) {
+                                    speedContext1.fillStyle = "rgb(" + r + ", 215,0)";
+                                    star(speedContext1, col * 20 + 10, row * 20 + 10, 10, 5, 0.5);
+                                    count++;
+                                }
+                            }
+                        }
+                        var end1 = performance.now();
+                        document.getElementById("ms1").innerHTML = Math.round(end1 - start1) + " ms (" + count + " stars)";
+
+                        count=0;
+                        var speedContext2 = document.getElementById("speedCanvas2").getContext("2d");
+                        var start2 = performance.now();
+                        for (var r = 0; r < 256; r++) {
+                            for (var row = 0; row < 10; row++) {
+                                for (var col = 0; col < 10; col++) {
+                                    speedContext2.fillStyle = "rgb(" + r + ", 215,0)";
+                                    draw10pxStar(speedContext2, col * 20 + 10, row * 20 + 10);
+                                    count++;
+                                }
+                            }
+                        }
+                        var end2 = performance.now();
+                        document.getElementById("ms2").innerHTML = Math.round(end2 - start2) + " ms (" + count + " stars)";
+
+                        function draw10pxStar(ctx, x, y) {
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.translate(x, y);
+                            ctx.moveTo(0, -10);
+                            for (var i = 0; i < 5; i++) {
+                                ctx.rotate(0.6283185307179586);
+                                ctx.lineTo(0, -4.5);
+                                ctx.rotate(0.6283185307179586);
+                                ctx.lineTo(0, -10);
+                            }
+                            ctx.fill();
+                            ctx.restore();
+                        }
+
+
+                    </script>
+
                 </section>
 
 
@@ -421,6 +491,17 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                         </li>
                     </ul>
                 </section>
+
+
+                <section>
+                    <h2>References</h2>
+                    <ul>
+                        <li><a href="https://egghead.io/series/learn-html5-graphics-and-animation?utm_source=mailchimp&utm_medium=email&utm_campaign=html5-graphics">Egghead.io Video Lesson on Canvas Tag</a></li>
+                        <li><a href="http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/">Original Star Drawing blog post by Programming Thomas</li></a>
+                    </ul>
+                </section>
+
+
 
 
 

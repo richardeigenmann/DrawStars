@@ -1,6 +1,24 @@
 angular.module('drawStars', [])
         .directive("drawstars", function () {
 
+            function drawVariableSizeStar(ctx, x, y, outerRadius, points, innerRadiusFraction) {
+                var halfAngle = Math.PI / points; // = 2 * PI / 2 * points
+                var innerRadius = outerRadius * innerRadiusFraction;
+                ctx.save();
+                ctx.beginPath();
+                ctx.translate(x, y);
+                ctx.moveTo(0, 0 - outerRadius);
+                for (var i = 0; i < points; i++) {
+                    ctx.rotate(halfAngle);
+                    ctx.lineTo(0, 0 - innerRadius);
+                    ctx.rotate(halfAngle);
+                    ctx.lineTo(0, 0 - outerRadius);
+                }
+                ctx.fill();
+                ctx.restore();
+            }
+
+
             /**
              * Originally found this page: http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/
              * This draws a star using parametrised radius and spike length. I fear that doing all those floating point 
@@ -10,7 +28,7 @@ angular.module('drawStars', [])
              * @param {type} y
              * @returns {undefined}
              */
-            function drawStar(ctx, x, y) {
+            function draw10pxStar(ctx, x, y) {
                 ctx.save();
                 ctx.beginPath();
                 ctx.translate(x, y);
@@ -36,22 +54,30 @@ angular.module('drawStars', [])
              * @param {type} ctx  the 2D context on which to draw
              * @returns {undefined}
              */
-            function drawStars(onStars, maxStars, onColor, offColor, ctx) {
+            function drawStars(ctx, onStars, maxStars, onColor, offColor, points, radius) {
                 ctx.fillStyle = offColor;
 
                 for (var i = maxStars; i > 0; i--) {
                     if (onStars >= i) {
                         ctx.fillStyle = onColor;
                     }
-                    drawStar(ctx, (i - 1) * 20 + 11, 11);
+                    if (points == 5 && radius == 10) {
+                        draw10pxStar(ctx, (i - 1) * 20 + 11, 11);
+                    } else {
+                        drawVariableSizeStar(ctx, ((i - 1) * 2 * radius) + radius + 1, radius + 1, radius, points, 0.5);
+                    }
                 }
             }
 
             return {
                 restrict: "E",
                 scope: {
-                    onstars: '=stars',
-                    maxstars: '=maxstars',
+                    onstars: '@stars',
+                    maxstars: '@maxstars',
+                    points: '@points',
+                    radius: '@radius',
+                    offcolor: '@offcolor',
+                    oncolor: '@oncolor',
                 },
                 template: "<canvas height='21'></canvas>",
                 link: function (scope, element) {
@@ -75,10 +101,38 @@ angular.module('drawStars', [])
                             maximumStars = parseInt(scope.maxstars);
                         }
 
-                        canvas.width = maximumStars * 20 + 2;
-                        var offColor = "gold";
-                        var onColor = "red";
-                        drawStars(parseInt(scope.onstars), maximumStars, onColor, offColor, ctx);
+                        var points;
+                        if (!scope.points) {
+                            points = 5;
+                        } else {
+                            points = parseInt(scope.points);
+                        }
+
+                        var radius;
+                        if (!scope.radius) {
+                            radius = 10;
+                        } else {
+                            radius = parseInt(scope.radius);
+                        }
+
+                        var offColor;
+                        if (! scope.offcolor) {
+                            offColor = "gold";
+                        } else {
+                            offColor = scope.offcolor;
+                        }
+
+                        var onColor;
+                        if (!scope.oncolor) {
+                            onColor = "red";
+                        } else {
+                            onColor = scope.oncolor;
+                        }
+
+
+                        canvas.width = maximumStars * 2 * radius + 2;
+                        canvas.height = radius * 2 + 1;
+                        drawStars(ctx, parseInt(scope.onstars), maximumStars, onColor, offColor, points, radius);
                     }
                     ;
 
