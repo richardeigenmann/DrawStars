@@ -84,10 +84,22 @@ angular.module('drawStars', [])
                     var canvas = element.find('canvas')[0];
                     var ctx = canvas.getContext('2d');
 
+                    scope.$watch('onstars', function () {
+                        drawThem();
+                    });
                     scope.$watch('maxstars', function () {
                         drawThem();
                     });
-                    scope.$watch('onstars', function () {
+                    scope.$watch('points', function () {
+                        drawThem();
+                    });
+                    scope.$watch('radius', function () {
+                        drawThem();
+                    });
+                    scope.$watch('offcolor', function () {
+                        drawThem();
+                    });
+                    scope.$watch('onolor', function () {
                         drawThem();
                     });
 
