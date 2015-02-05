@@ -15,10 +15,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <link rel="stylesheet" href="build/presentation.css">
-        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">
+        <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css">
+
 
         <!-- For syntax highlighting -->
-        <!--	<link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css">-->
+        <!--        	<link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css">-->
 
         <!-- If the query includes 'print-pdf', include the PDF print sheet -->
         <script>
@@ -50,6 +52,41 @@
                     </p>
                 </section>
 
+
+
+                <section ng-controller="FirstStarController">
+                    <h2>Draw a star</h2>
+                    <!-- highlight.js doesn't monitor for changes in the source so it doesn't update the
+                        AngularJs variables when they change. To fix I uncomment this line and cut and paste
+                        the generated code below. -->
+                    <!-- <pre><code class="html"><drawstars maxstars="1" points="{{points}}" radius="85"></drawstars></code></pre> -->
+                    <pre><span class="tag">&lt;<span class="title">drawstars</span> <span class="attribute"><span class="hljs-variable">maxstars</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"1"</span></span> <span class="attribute"><span class="hljs-variable">points</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{points}}"</span></span> <span class="attribute"><span class="hljs-variable">radius</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{radius}}"</span></span>&gt;</span><span class="tag">&lt;/<span class="title">drawstars</span>&gt;</span></pre>
+                    <div style="display:inline-block; margin-right: 50px">
+                        <p>Controls:</p>
+                        <label for="slider-points">points: </label>
+                        <input id="slider-points" type="range" min="4" max="21"  ng-model='points' list="slider-points-ticks">
+                        <p></p>
+                        <label for="slider-radius">radius: </label>
+                        <input id="slider-radius" type="range" min="30" max="120" ng-model='radius'>
+                        <datalist id="slider-points-ticks">
+                            <option>1</option>
+                            <option>3</option>
+                            <option>5</option>
+                            <option>7</option>
+                            <option>9</option>
+                            <option>11</option>
+                            <option>13</option>
+                            <option>15</option>
+                            <option>17</option>
+                            <option>19</option>
+                            <option>21</option>
+                        </datalist>
+                    </div>
+                    <drawstars maxstars="1" points="{{points}}" radius="{{radius}}"></drawstars>
+                </section>
+
+
+
                 <section>
                     <h2>Different Stars (Js)</h2>
                     <canvas id="canvas1" width="172" height="171"></canvas>
@@ -61,20 +98,15 @@
                         var ctx1 = document.getElementById("canvas1").getContext("2d");
                         ctx1.fillStyle = "gold";
                         star(ctx1, 85, 85, 85, 4, 0.5);
-
                         var ctx2 = document.getElementById("canvas2").getContext("2d");
                         ctx2.fillStyle = "gold";
                         star(ctx2, 85, 85, 85, 5, 0.5);
-
                         var ctx3 = document.getElementById("canvas3").getContext("2d");
                         ctx3.fillStyle = "gold";
                         star(ctx3, 85, 85, 85, 6, 0.5);
-
                         var ctx4 = document.getElementById("canvas4").getContext("2d");
                         ctx4.fillStyle = "gold";
                         star(ctx4, 85, 85, 85, 35, 0.5);
-
-
                         function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             var halfAngle = Math.PI / points; // 2 * PI / 2 * points
                             var innerRadius = outerRadius * innerRadiusFraction;
@@ -120,11 +152,9 @@
                         ctxExplain.fillStyle = "gold";
                         star(ctxExplain, 200, 200, 185, 5, 0.5);
                         explain(ctxExplain, 200, 200, 185, 5, 0.5);
-
                         function explain(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             var halfAngle = Math.PI / points; // 2 * PI / 2 * points
                             var innerRadius = outerRadius * innerRadiusFraction;
-
                             // draw axis lines
                             ctx.save();
                             ctx.translate(x, y);
@@ -136,7 +166,6 @@
                                 ctx.rotate(halfAngle);
                             }
                             ctx.restore();
-
                             // draw arcs
                             ctx.save();
                             ctx.translate(x, y);
@@ -147,7 +176,6 @@
                                 ctx.stroke();
                             }
                             ctx.restore();
-
                             // draw arrowheads
                             ctx.save();
                             ctx.translate(x, y);
@@ -158,7 +186,6 @@
                                 ctx.rotate(halfAngle);
                             }
                             ctx.restore();
-
                             // write angles
                             ctx.save();
                             ctx.translate(x, y);
@@ -169,7 +196,6 @@
                                 ctx.rotate(halfAngle);
                             }
                             ctx.restore();
-
                             ctx.save();
                             ctx.translate(x, y);
                             var halfOuterRadius = outerRadius / 2;
@@ -219,7 +245,6 @@
                         var ctx11 = canvas11.getContext("2d");
                         ctx11.fillStyle = "gold";
                         star(ctx11, 200, 200, 185, 5, 0.5);
-
                         var slider11 = document.getElementById("slider-11");
                         slider11.oninput = function () {
                             var newValue = slider11.value;
@@ -231,8 +256,7 @@
                             ctx11.fillStyle = "black";
                             ctx11.fillText(newValue, 192, 200);
                             ctx11.restore();
-                        };
-                    </script>
+                        };</script>
                 </section>
 
                 <section>
@@ -417,12 +441,11 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
 
                 <section>
                     <h2>Speed comparisons</h2>
-                    <div style="display:inline-block">
+                    <div style="display:inline-block; margin-right: 50px">
                         <p>parametrised stars</p>
                         <canvas id="speedCanvas1" width="200" height="200"></canvas>
                         <p id="ms1"></p>
                     </div>
-                    <div style="display:inline-block;margin: 50px" ></div>
                     <div style="display:inline-block">
                         <p>10px hard coded stars</p>
                         <canvas id="speedCanvas2" width="200" height="200"></canvas>
@@ -431,8 +454,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
 
                     <script type="text/javascript">
                         var speedContext1 = document.getElementById("speedCanvas1").getContext("2d");
-
-                        var count=0;
+                        var count = 0;
                         var start1 = performance.now();
                         for (var r = 0; r < 256; r++) {
                             for (var row = 0; row < 10; row++) {
@@ -445,8 +467,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                         }
                         var end1 = performance.now();
                         document.getElementById("ms1").innerHTML = Math.round(end1 - start1) + " ms (" + count + " stars)";
-
-                        count=0;
+                        count = 0;
                         var speedContext2 = document.getElementById("speedCanvas2").getContext("2d");
                         var start2 = performance.now();
                         for (var r = 0; r < 256; r++) {
@@ -460,7 +481,6 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                         }
                         var end2 = performance.now();
                         document.getElementById("ms2").innerHTML = Math.round(end2 - start2) + " ms (" + count + " stars)";
-
                         function draw10pxStar(ctx, x, y) {
                             ctx.save();
                             ctx.beginPath();
@@ -510,7 +530,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                     <h2>Impressum</h2>
                     <ul>
                         <li>Author: <a href="mailto://richard.eigenmann@gmail.com">Richard Eigenmann</a>, Z&uuml;rich, Switzerland</li>
-                        <li>Last Modification: 6 Jan 2015</li>
+                        <li>Last Modification: 30 Jan 2015</li>
                         <li>Presentation Tool: <a href="http://lab.hakim.se/reveal-js/#/">reveal.js</a>
                         </li>
                         <li>Code: <a href="https://github.com/richardeigenmann/drawstars">https://github.com/richardeigenmann/drawstars</a>
@@ -544,34 +564,34 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             // parallaxBackgroundSize: '2100px 900px',
 
                             // Optional libraries used to extend on reveal.js
-                            dependencies: [{
-//				src: 'bower_components/reveal.js/lib/js/classList.js',
-                                    condition: function () {
+                            dependencies: [
+                                // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+                                {src: 'bower_components/reveal.js/lib/js/classList.js', condition: function () {
                                         return !document.body.classList;
-                                    }
-                                }, {
-                                    src: 'bower_components/reveal.js/plugin/highlight/highlight.js',
-                                    async: true,
-                                    callback: function () {
+                                    }},
+                                // Interpret Markdown in <section> elements
+                                {src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function () {
+                                        return !!document.querySelector('[data-markdown]');
+                                    }},
+                                {src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function () {
+                                        return !!document.querySelector('[data-markdown]');
+                                    }},
+                                // Syntax highlight for <code> elements
+                                {src: 'bower_components/highlightjs/highlight.pack.js', async: true, callback: function () {
                                         hljs.initHighlightingOnLoad();
-                                    }
-                                }, {
-                                    src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js',
-                                    async: true,
-                                    condition: function () {
-                                        return !!document.body.classList;
-                                    }
-                                }, {
-                                    src: 'bower_components/reveal.js/plugin/notes/notes.js',
-                                    async: true,
-                                    condition: function () {
-                                        return !!document.body.classList;
-                                    }
-                                }]
-                        });
-        </script>
+                                    }},
+                                // Zoom in and out with Alt+click
+                                {src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true},
+                                // Speaker notes
+                                {src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true},
+                                // Remote control your reveal.js presentation using a touch device
+                                {src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true},
+                                // MathJax
+                                {src: 'bower_components/reveal.js/plugin/math/math.js', async: true}
+                            ]
+                        });</script>
 
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.3/angular.min.js"></script>
         <script src="drawStars.js"></script>
         <script>
                         angular.module('drawStarsPresentation', ['drawStars'])
@@ -589,7 +609,15 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                                         $scope.maxStars = '4';
                                     }
                                 ])
-                                ;
+                                .controller('FirstStarController', ['$scope', '$sce', function Controller($scope, $sce) {
+                                        $scope.points = '5';
+                                        $scope.radius = '85';
+                                        $scope.onStars = '1';
+                                        $scope.maxStars = '1';
+                                        $scope.gaga = $sce.trustAsHtml("GaGa" + $scope.points);
+                                    }
+                                ])
+                        ;
         </script>
 
     </body>
