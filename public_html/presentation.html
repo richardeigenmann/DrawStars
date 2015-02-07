@@ -15,7 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <link rel="stylesheet" href="build/presentation.css">
-        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">
+        <!--        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">-->
+        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/league.css" id="theme">
         <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css">
 
 
@@ -56,16 +57,21 @@
 
                 <section ng-controller="FirstStarController">
                     <h2>Draw a star</h2>
-                    <!-- highlight.js doesn't monitor for changes in the source so it doesn't update the
-                        AngularJs variables when they change. To fix I uncomment this line and cut and paste
-                        the generated code below. -->
-                    <!-- <pre><code class="html"><drawstars maxstars="1" points="{{points}}" radius="85"></drawstars></code></pre> -->
-                    <pre><span class="tag">&lt;<span class="title">drawstars</span> <span class="attribute"><span class="hljs-variable">maxstars</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"1"</span></span> <span class="attribute"><span class="hljs-variable">points</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{points}}"</span></span> <span class="attribute"><span class="hljs-variable">radius</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{radius}}"</span></span>&gt;</span><span class="tag">&lt;/<span class="title">drawstars</span>&gt;</span></pre>
-                    <div style="display:inline-block; margin-right: 50px">
+                    <div style="display:inline-block; margin-right: 50px; width: 400px">
+                        <!-- highlight.js doesn't monitor for changes in the source so it doesn't update the
+                            AngularJs variables when they change. To fix I uncomment this line and cut and paste
+                            the generated code below. -->
+                        <!-- <pre><code class="html"><drawstars maxstars="1" points="{{points}}" radius="85"></drawstars></code></pre> -->
+                        <pre><span class="tag">&lt;<span class="title">drawstars</span> <span class="attribute">
+        <span class="hljs-variable">maxstars</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"1"</span></span> 
+        <span class="attribute"><span class="hljs-variable">points</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{points}}"</span></span>
+        <span class="attribute"><span class="hljs-variable">radius</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{radius}}"</span></span>
+        <span class="attribute"><span class="hljs-variable">offcolor</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"#{{color}}"</span></span>
+&gt;</span><span class="tag">&lt;/<span class="title">drawstars</span>&gt;</span></pre>
                         <p>Controls:</p>
                         <label for="slider-points">points: </label>
                         <input id="slider-points" type="range" min="4" max="21"  ng-model='points' list="slider-points-ticks">
-                        <p></p>
+                        <br>
                         <label for="slider-radius">radius: </label>
                         <input id="slider-radius" type="range" min="30" max="120" ng-model='radius'>
                         <datalist id="slider-points-ticks">
@@ -81,13 +87,120 @@
                             <option>19</option>
                             <option>21</option>
                         </datalist>
+                        <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>
+                        <br>
+                        Color: <input class="color" ng-model="color">
                     </div>
-                    <drawstars maxstars="1" points="{{points}}" radius="{{radius}}"></drawstars>
+                    <div style="display:inline-block; width: 140px; height:140px">
+                        <drawstars maxstars="1" points="{{points}}" radius="{{radius}}" offcolor="#{{color}}"></drawstars>
+                    </div>
                 </section>
 
 
 
                 <section>
+                    <h2>Many stars</h2>
+                    <div ng-controller="StarsSliderController">
+                        <div style="display:inline-block; margin-right: 50px; width: 450px">
+                            <!-- highlight.js doesn't monitor for changes in the source so it doesn't update the
+                                AngularJs variables when they change. To fix I uncomment this line and cut and paste
+                                the generated code below. -->
+                            <!-- <pre><code class="html"><drawstars maxstars="1" points="{{points}}" radius="85"></drawstars></code></pre> -->
+                            <pre><span class="tag">&lt;<span class="title">drawstars</span> <span class="attribute">
+        <span class="hljs-variable">maxstars</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{maxstars}}"</span></span> 
+        <span class="attribute"><span class="hljs-variable">onstars</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"{{onstars}}"</span></span>
+        <span class="attribute"><span class="hljs-variable">highlightcolor</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"#{{highlightcolor}}"</span></span>
+        <span class="attribute"><span class="hljs-variable">offcolor</span></span><span class="hljs-variable">=</span><span class="value"><span class="hljs-string">"#{{offcolor}}"</span></span>
+&gt;</span><span class="tag">&lt;/<span class="title">drawstars</span>&gt;</span></pre>
+
+
+                            <label for="slider-onstars">onstars: </label>
+                            <input id="slider-onstars" type="range" min="0" max="26"  ng-model='onstars' list="slider-stars-ticks">
+                            <br>
+                            <label for="slider-maxstars">maxstars: </label>
+                            <input id="slider-maxstars" type="range" min="1" max="26" ng-model='maxstars' list="slider-stars-ticks">
+                            <datalist id="slider-stars-ticks">
+                                <option>1</option>
+                                <option>3</option>
+                                <option>5</option>
+                                <option>7</option>
+                                <option>9</option>
+                                <option>11</option>
+                                <option>13</option>
+                                <option>15</option>
+                                <option>17</option>
+                                <option>19</option>
+                                <option>21</option>
+                                <option>23</option>
+                                <option>25</option>
+                                <option>27</option>
+                            </datalist>
+                            highlightcolor: <input class="color" ng-model="highlightcolor">
+                            offcolor: <input class="color" ng-model="offcolor"><br>
+                            <drawstars stars="{{onstars}}" maxstars="{{maxstars}}"  hilightColor="#{{highlightcolor}}" offcolor="#{{offcolor}}"></drawstars>
+                        </div>
+                </section>
+
+                <section>
+                    <h2>Star gallery</h2>
+                    <div ng-controller="DrawStarsTestController">
+                        <small>
+                            <!-- Taking stars from a variable in the $scope -->
+                            4 Stars: <drawstars stars="stars4"></drawstars>
+                            3 Stars: <drawstars stars="stars3"></drawstars>
+                            2 Stars: <drawstars stars="stars2"></drawstars>
+                            1 Star: <drawstars stars="stars1"></drawstars>
+                            0 Stars: <drawstars stars="stars0"></drawstars>
+                            <hr>
+
+                            <!-- Taking stars from a constant value and defining maxstars --> 
+                            4/4 Stars: <drawstars stars="4" maxstars="4"></drawstars>
+                            3/4 Stars: <drawstars stars="3" maxstars="4"></drawstars>
+                            2/4 Stars: <drawstars stars="2" maxstars="4"></drawstars>
+                            1/4 Stars: <drawstars stars="1" maxstars="4"></drawstars>
+                            0/4 Stars: <drawstars stars="0" maxstars="4"></drawstars>
+
+                            <hr>
+                            <!-- Trying it out with 5 stars -->
+                            5/5 Stars: <drawstars stars="5" maxstars="5"></drawstars>
+                            4/5 Stars: <drawstars stars="4" maxstars="5"></drawstars>
+                            3/5 Stars: <drawstars stars="3" maxstars="5"></drawstars>
+                            2/5 Stars: <drawstars stars="2" maxstars="5"></drawstars>
+                            1/5 Stars: <drawstars stars="1" maxstars="5"></drawstars>
+                            0/5 Stars: <drawstars stars="0" maxstars="5"></drawstars>
+
+                            <hr>
+                            <!-- Trying it with 2 stars -->
+                            2/2 Stars: <drawstars stars="2" maxstars="2"></drawstars>
+                            1/2 Stars: <drawstars stars="1" maxstars="2"></drawstars>
+                            0/2 Stars: <drawstars stars="0" maxstars="2"></drawstars>
+
+                            <hr>
+                            <!-- wrong but works anyway -->
+                            2/2 Stars: <drawstars stars="4" maxstars="2"></drawstars>
+                        </small>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>A runnable example</h2>
+                    <pre><code class="html">&lt;!DOCTYPE html>
+&lt;html ng-app="drawStarsApp">
+    &lt;body>
+    &lt;drawstars stars="3" maxstars="4">&lt;/drawstars>
+    &lt;script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js">&lt;/script>
+    &lt;script src="drawStars.js">&lt;/script>
+    &lt;script>
+        angular.module('drawStarsApp', ['drawStars']);
+    &lt;/script>
+&lt;/body>
+&lt;/html>
+</code></pre>
+                    <small><a href="drawStarsApp.html">Download Code</a></small>
+                </section>
+
+
+                <!-- <section>
                     <h2>Different Stars (Js)</h2>
                     <canvas id="canvas1" width="172" height="171"></canvas>
                     <canvas id="canvas2" width="172" height="171"></canvas>
@@ -126,31 +239,51 @@
                         }
                     </script>
 
-                </section>
+                </section> -->
 
-                <section>
+                <!-- <section>
                     <h2>Different Stars (AngularJs)</h2>
                     <drawstars maxstars="1" points="4" radius="85"></drawstars>
                     <drawstars maxstars="1" points="5" radius="85"></drawstars>
                     <drawstars maxstars="1" points="6" radius="85"></drawstars>
                     <drawstars maxstars="1" points="25" radius="85"></drawstars>
                     <p>4,5,6 and 25 point stars</p>
-                </section>
+                </section>  -->
 
 
                 <section>
                     <h2>The Math</h2>
                     <canvas id="canvas-explain" width="400" height="400"></canvas>
-                    <p>Divide the circumference by the number of peaks and toughs:<br>
-                        The whole circle in radians is 2 * Math.PI<br>Each axis is therefore rotated by<br>
-                        2 * Math.PI / ( OuterPoints + InnerPoints )<br>
-                        = 2 * Math.PI / ( 2 * Points)<br>
-                        = Math.PI / Points
-                    </p>
+                    <small>
+
+                        <p style="text-align: left;">Divide the circumference by the number of peaks and toughs:<br>
+                            The whole circle in radians is 2 * Math.PI<br>Each point is therefore rotated by<br>
+                            2 * Math.PI / ( OuterPoints + InnerPoints ) from the prior one<br>
+                            = 2 * Math.PI / ( 2 * Points) = <strong>Math.PI / Points</strong>
+                        </p>
+                    </small>
                     <script type="text/javascript">
                         var ctxExplain = document.getElementById("canvas-explain").getContext("2d");
                         ctxExplain.fillStyle = "gold";
                         star(ctxExplain, 200, 200, 185, 5, 0.5);
+                        function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
+                            var halfAngle = Math.PI / points; // 2 * PI / 2 * points
+                            var innerRadius = outerRadius * innerRadiusFraction;
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.translate(x, y);
+                            ctx.moveTo(0, 0 - outerRadius);
+                            for (var i = 0; i < points; i++)
+                            {
+                                ctx.rotate(halfAngle);
+                                ctx.lineTo(0, 0 - innerRadius);
+                                ctx.rotate(halfAngle);
+                                ctx.lineTo(0, 0 - outerRadius);
+                            }
+                            ctx.fill();
+                            ctx.restore();
+                        }
+
                         explain(ctxExplain, 200, 200, 185, 5, 0.5);
                         function explain(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             var halfAngle = Math.PI / points; // 2 * PI / 2 * points
@@ -225,7 +358,7 @@
                     </script>
                 </section>
 
-                <section>
+                <!-- <section>
                     <h2>This one goes goes to 11!</h2>
                     <label for="slider-11">Points: </label>
                     <input id="slider-11" type="range" min="4" max="11" value="5" list="slider-11-points">
@@ -257,14 +390,15 @@
                             ctx11.fillText(newValue, 192, 200);
                             ctx11.restore();
                         };</script>
-                </section>
+                </section>  -->
 
                 <section>
-                    <h2>Drawing the star</h2>
-                    <pre>
+                    <section>
+                        <h2>Drawing the star in JavaScript</h2>
+                        <pre>
 <code class="html"><canvas id="canvas" width="200" height="200"></canvas>
 </code></pre>
-                    <pre><code class="javascript">var ctx = document.getElementById("canvas").getContext("2d");
+                        <pre><code class="javascript">var ctx = document.getElementById("canvas").getContext("2d");
 ctx.fillStyle = "gold";
 star(ctx, 100, 100, 85, 4, 0.5);
 function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
@@ -282,86 +416,49 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
     ctx.fill(); ctx.restore();
 }
 </code></pre>
-                    <small>Credits to: <a href="http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/">Programming Thomas</a></small>
+                        <small>Credits to: <a href="http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/">Programming Thomas</a></small>
+                    </section>
+                    <section>
+                        <h2>Canvas Gotcha</h2>
+                        <div style="font-size:smaller;">
+                            <p>Make sure you specify width and height as elements of the canvas tag. If not you will 
+                                get a default size of 300x150 as per the HTML5 spec.</p>
+                            <p><strong><u>Do not</u></strong> specify the width and height as a CSS style for a canvas tag. This specifies
+                                the layout size and effectively scales the element width and height to the CSS defined 
+                                size.</p>
+                            <p>Source: <a href="https://egghead.io/lessons/javascript-introduction-to-html-canvas-element">Video from Keith Peters</a></p>
+                        </div>
+                    </section>
                 </section>
 
-                <section>
-                    <h2>Doing it with AngularJS</h2>
-                    <div ng-controller="DrawStarsTestController">
-                        <small>
-                            <!-- Taking stars from a variable in the $scope -->
-                            4 Stars: <drawstars stars="stars4"></drawstars>
-                            3 Stars: <drawstars stars="stars3"></drawstars>
-                            2 Stars: <drawstars stars="stars2"></drawstars>
-                            1 Star: <drawstars stars="stars1"></drawstars>
-                            0 Stars: <drawstars stars="stars0"></drawstars>
-                            <hr>
 
-                            <!-- Taking stars from a constant value and defining maxstars --> 
-                            4/4 Stars: <drawstars stars="4" maxstars="4"></drawstars>
-                            3/4 Stars: <drawstars stars="3" maxstars="4"></drawstars>
-                            2/4 Stars: <drawstars stars="2" maxstars="4"></drawstars>
-                            1/4 Stars: <drawstars stars="1" maxstars="4"></drawstars>
-                            0/4 Stars: <drawstars stars="0" maxstars="4"></drawstars>
 
-                            <hr>
-                            <!-- Trying it out with 5 stars -->
-                            5/5 Stars: <drawstars stars="5" maxstars="5"></drawstars>
-                            4/5 Stars: <drawstars stars="4" maxstars="5"></drawstars>
-                            3/5 Stars: <drawstars stars="3" maxstars="5"></drawstars>
-                            2/5 Stars: <drawstars stars="2" maxstars="5"></drawstars>
-                            1/5 Stars: <drawstars stars="1" maxstars="5"></drawstars>
-                            0/5 Stars: <drawstars stars="0" maxstars="5"></drawstars>
 
-                            <hr>
-                            <!-- Trying it with 2 stars -->
-                            2/2 Stars: <drawstars stars="2" maxstars="2"></drawstars>
-                            1/2 Stars: <drawstars stars="1" maxstars="2"></drawstars>
-                            0/2 Stars: <drawstars stars="0" maxstars="2"></drawstars>
-
-                            <hr>
-                            <!-- wrong but works anyway -->
-                            2/2 Stars: <drawstars stars="4" maxstars="2"></drawstars>
-                        </small>
-                    </div>
-                </section>
 
                 <section>
-                    <h2>AngularJS code</h2>
-                    <pre><code class="html">&lt;!DOCTYPE html>
-&lt;html ng-app="drawStarsApp">
-    &lt;body>
-    &lt;drawstars stars="3" maxstars="4">&lt;/drawstars>
-    &lt;script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js">&lt;/script>
-    &lt;script src="drawStars.js">&lt;/script>
-    &lt;script>
-        angular.module('drawStarsApp', ['drawStars']);
-    &lt;/script>
-&lt;/body>
-&lt;/html>
-</code></pre>
-                    <small><a href="drawStarsApp.html">Download Code</a></small>
-                </section>
-
-                <section>
-                    <h2>Under the hood</h2>
-                    <pre><code class="javascript">function drawStar(ctx, x, y) {
+                    <section>
+                        <h2>Under the hood</h2>
+                        <pre><code class="javascript">function drawVariableSizeStar(ctx, x, y, outerRadius,
+         points, innerRadiusFraction) {
+    var halfAngle = Math.PI / points; // = 2 * PI / 2 * points
+    var innerRadius = outerRadius * innerRadiusFraction;
     ctx.save();
     ctx.beginPath();
     ctx.translate(x, y);
-    ctx.moveTo(0, -10);
-    for (var i = 0; i < 5; i++) {
-        ctx.rotate(0.6283185307179586);
-        ctx.lineTo(0, -4.5);
-        ctx.rotate(0.6283185307179586);
-        ctx.lineTo(0, -10);
+    ctx.moveTo(0, 0 - outerRadius);
+    for (var i = 0; i < points; i++) {
+        ctx.rotate(halfAngle);
+        ctx.lineTo(0, 0 - innerRadius);
+        ctx.rotate(halfAngle);
+        ctx.lineTo(0, 0 - outerRadius);
     }
     ctx.fill();
-    ctx.restore();
-}
-</code></pre>
+ctx.restore();
+}</code></pre>
+                    </section>
+                    <section>
 
-                    <pre><code class="javascript">function drawStars(stars, maxStars, onColor, offColor, ctx) {
+                        <pre><code class="javascript">function drawStars(stars, maxStars, onColor, offColor, ctx) {
     ctx.fillStyle = offColor;
     for (var i = maxStars; i > 0; i--) {
         if (stars >= i) {
@@ -371,7 +468,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
     }
 }
 </code></pre>                    
-                </section>
+                    </section>
 
 
                 <section>
@@ -383,34 +480,90 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
             return {
                 restrict: "E",
                 scope: {
-                    stars: '=stars',
-                    maxstars: '=maxstars',
+                    onstars: '@stars',
+                    maxstars: '@maxstars',
+                    points: '@points',
+                    radius: '@radius',
+                    offcolor: '@offcolor',
+                    highligtcolor: '@hilightcolor',
                 },
-                template: "<canvas height='21'></canvas>",
+                template: "<canvas></canvas>",
                 link: function (scope, element) {
                     var canvas = element.find('canvas')[0];
                     var ctx = canvas.getContext('2d');
 
-                    // default to 4 stars if nothing is defined
-                    var maximumStars;
-                    if (!scope.maxstars) {
-                        maximumStars = 4;
-                    } else {
-                        maximumStars = parseInt(scope.maxstars);
-                    }
+                    scope.$watch('onstars', function () {
+                        drawThem();
+                    });
+                    scope.$watch('maxstars', function () {
+                        drawThem();
+                    });
+                    scope.$watch('points', function () {
+                        drawThem();
+                    });
+                    scope.$watch('radius', function () {
+                        drawThem();
+                    });
+                    scope.$watch('offcolor', function () {
+                        drawThem();
+                    });
+                    scope.$watch('highligtcolor', function () {
+                        drawThem();
+                    });
 
-                    canvas.width = maximumStars * 20 + 2;
-                    var offColor = "gold";
-                    var onColor = "red";
-                    drawStars(parseInt(scope.stars), maximumStars, onColor, offColor, ctx);
-                }
+
+                    function drawThem() {
+                        // default to 4 stars if nothing is defined
+                        var maximumStars;
+                        if (!scope.maxstars) {
+                            maximumStars = 4;
+                        } else {
+                            maximumStars = parseInt(scope.maxstars);
+                        }
+
+                        var points;
+                        if (!scope.points) {
+                            points = 5;
+                        } else {
+                            points = parseInt(scope.points);
+                        }
+
+                        var radius;
+                        if (!scope.radius) {
+                            radius = 10;
+                        } else {
+                            radius = parseInt(scope.radius);
+                        }
+
+                        var offColor;
+                        if (!scope.offcolor) {
+                            offColor = "gold";
+                        } else {
+                            offColor = scope.offcolor;
+                        }
+
+                        var highlightColor;
+                        if (!scope.highligtcolor) {
+                            highlightColor = "red";
+                        } else {
+                            highlightColor = scope.highligtcolor;
+                        }
+
+                        canvas.width = maximumStars * 2 * radius + 2;
+                        canvas.height = radius * 2 + 1;
+                        drawStars(ctx, parseInt(scope.onstars), maximumStars, highlightColor, offColor, points, radius);
+                    };  // drawThem
+
+                    drawThem();
+                } // link
             };
-        })
-;
+        }) // directive
+        ; // angular.module
 </code></pre>                    
                 </section>
+                </section>
 
-                <section>
+                <!-- <section>
                     <h2>AngularJS data binding</h2>
                     <div ng-controller="StarsSliderController">
                         <label for="slider-onstars">onStars: </label>
@@ -434,12 +587,12 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                         <p>Stars: {{onStars}}/{{maxStars}}</p>
                         <drawstars stars="{{onStars}}" maxstars="{{maxStars}}"></drawstars>
                     </div>
-                </section>
+                </section> -->
 
 
 
 
-                <section>
+                <!-- <section>
                     <h2>Speed comparisons</h2>
                     <div style="display:inline-block; margin-right: 50px">
                         <p>parametrised stars</p>
@@ -499,15 +652,15 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
 
                     </script>
 
-                </section>
+                </section> -->
 
 
                 <section>
                     <h2>Open Source</h2>
-                    <ul>
-                        <li>drawstars is an Open Source project by Richard Eigenmann.</li>
+                    <ul style="font-size: 70%; margin-left: 150px;">
+                        <li>drawstars is an Open Source project by Richard Eigenmann</li>
                         <li>It is licensed under a yet to be determinded license</li>
-                        <li>The source code is on Github (soon): <a href="https://github.com/richardeigenmann/drawstars">https://github.com/richardeigenmann/drawstars</a>
+                        <li>The source code is on Github: <a href="https://github.com/richardeigenmann/drawstars">https://github.com/richardeigenmann/drawstars</a>
                         </li>
                     </ul>
                 </section>
@@ -530,9 +683,9 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                     <h2>Impressum</h2>
                     <ul>
                         <li>Author: <a href="mailto://richard.eigenmann@gmail.com">Richard Eigenmann</a>, Z&uuml;rich, Switzerland</li>
-                        <li>Last Modification: 30 Jan 2015</li>
-                        <li>Presentation Tool: <a href="http://lab.hakim.se/reveal-js/#/">reveal.js</a>
-                        </li>
+                        <li>Last Modification: 7 Feb 2015</li>
+                        <li>Presentation Tool: <a href="http://lab.hakim.se/reveal-js/#/">reveal.js</a></li>
+                        <li>Libraries: <a href="http://jscolor.com/">JSColor</a></li>
                         <li>Code: <a href="https://github.com/richardeigenmann/drawstars">https://github.com/richardeigenmann/drawstars</a>
                         </li>
                     </ul>
@@ -555,13 +708,23 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                             history: true,
                             center: true,
                             touch: true,
+                            loop: false,
+                            rtl: false,
+                            fragments: false,
+                            embedded: false,
+                            help: true,
+                            autoSlide: 0,
+                            mouseWheel: true,
+                            hideAddressBar: true,
                             previewLinks: false,
-                            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-                            transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                            //theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                            //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+                            transition: 'default',
+                            transitionSpeed: 'default', // default/fast/slow
 
-                            // Parallax scrolling
-                            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-                            // parallaxBackgroundSize: '2100px 900px',
+                            // Transition style for full page slide backgrounds
+                            backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
 
                             // Optional libraries used to extend on reveal.js
                             dependencies: [
@@ -604,20 +767,22 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                                         $scope.stars0 = "0";
                                     }
                                 ])
-                                .controller('StarsSliderController', ['$scope', function Controller($scope) {
-                                        $scope.onStars = '2';
-                                        $scope.maxStars = '4';
-                                    }
-                                ])
                                 .controller('FirstStarController', ['$scope', '$sce', function Controller($scope, $sce) {
                                         $scope.points = '5';
                                         $scope.radius = '85';
                                         $scope.onStars = '1';
                                         $scope.maxStars = '1';
-                                        $scope.gaga = $sce.trustAsHtml("GaGa" + $scope.points);
+                                        $scope.color = 'FFD700';
                                     }
                                 ])
-                        ;
+                                .controller('StarsSliderController', ['$scope', function Controller($scope) {
+                                        $scope.onstars = '3';
+                                        $scope.maxstars = '8';
+                                        $scope.highlightcolor = 'FF0000';
+                                        $scope.offcolor = 'FFD700';
+                                    }
+                                ])
+                                ;
         </script>
 
     </body>

@@ -28,7 +28,7 @@ angular.module('drawStars', [])
              * @param {type} y
              * @returns {undefined}
              */
-            function draw10pxStar(ctx, x, y) {
+            /*function draw10pxStar(ctx, x, y) {
                 ctx.save();
                 ctx.beginPath();
                 ctx.translate(x, y);
@@ -41,7 +41,7 @@ angular.module('drawStars', [])
                 }
                 ctx.fill();
                 ctx.restore();
-            }
+            }*/
 
             /**
              * Draws 'maxStars' stars on the supplied 2D context.
@@ -61,11 +61,11 @@ angular.module('drawStars', [])
                     if (onStars >= i) {
                         ctx.fillStyle = onColor;
                     }
-                    if (points == 5 && radius == 10) {
-                        draw10pxStar(ctx, (i - 1) * 20 + 11, 11);
-                    } else {
+                    //if (points == 5 && radius == 10) {
+                    //  draw10pxStar(ctx, (i - 1) * 20 + 11, 11);
+                    //} else {
                         drawVariableSizeStar(ctx, ((i - 1) * 2 * radius) + radius + 1, radius + 1, radius, points, 0.5);
-                    }
+                    //}
                 }
             }
 
@@ -77,9 +77,9 @@ angular.module('drawStars', [])
                     points: '@points',
                     radius: '@radius',
                     offcolor: '@offcolor',
-                    oncolor: '@oncolor',
+                    highligtcolor: '@hilightcolor',
                 },
-                template: "<canvas height='21'></canvas>",
+                template: "<canvas></canvas>",
                 link: function (scope, element) {
                     var canvas = element.find('canvas')[0];
                     var ctx = canvas.getContext('2d');
@@ -99,59 +99,56 @@ angular.module('drawStars', [])
                     scope.$watch('offcolor', function () {
                         drawThem();
                     });
-                    scope.$watch('onolor', function () {
+                    scope.$watch('highligtcolor', function () {
                         drawThem();
                     });
 
 
                     function drawThem() {
-                        // default to 4 stars if nothing is defined
                         var maximumStars;
                         if (!scope.maxstars) {
-                            maximumStars = 4;
+                            maximumStars = 4; // default to 4 stars if nothing is defined
                         } else {
                             maximumStars = parseInt(scope.maxstars);
                         }
 
                         var points;
                         if (!scope.points) {
-                            points = 5;
+                            points = 5; // defaults to 5 points
                         } else {
                             points = parseInt(scope.points);
                         }
 
                         var radius;
                         if (!scope.radius) {
-                            radius = 10;
+                            radius = 10; // defaults to a radius of 10
                         } else {
                             radius = parseInt(scope.radius);
                         }
 
                         var offColor;
-                        if (! scope.offcolor) {
-                            offColor = "gold";
+                        if (!scope.offcolor) {
+                            offColor = "gold"; // defaults to color gold
                         } else {
                             offColor = scope.offcolor;
                         }
 
-                        var onColor;
-                        if (!scope.oncolor) {
-                            onColor = "red";
+                        var highlightColor;
+                        if (!scope.highligtcolor) {
+                            highlightColor = "red";  // defaults to color red
                         } else {
-                            onColor = scope.oncolor;
+                            highlightColor = scope.highligtcolor;
                         }
-
 
                         canvas.width = maximumStars * 2 * radius + 2;
                         canvas.height = radius * 2 + 1;
-                        drawStars(ctx, parseInt(scope.onstars), maximumStars, onColor, offColor, points, radius);
-                    }
-                    ;
+                        drawStars(ctx, parseInt(scope.onstars), maximumStars, highlightColor, offColor, points, radius);
+                    };  // drawThem
 
                     drawThem();
-                }
+                } // link
             };
-        })
-        ;
+        }) // directive
+        ; // angular.module
 
 
