@@ -14,15 +14,19 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <link rel="stylesheet" href="build/presentation.css">
+        <!--<link rel="stylesheet" href="build/presentation.css">-->
+        <link rel="stylesheet" href="presentation.css">
         <!--<link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">-->
         <!--<link rel="stylesheet" href="bower_components/reveal.js/css/theme/league.css" id="theme">-->
-        <link rel="stylesheet" href="build/league.css" id="theme">
-        <link rel="stylesheet" href="build/league-gothic.css">
+        <!--<link rel="stylesheet" href="build/league.css" id="theme">-->
+        <link rel="stylesheet" href="league.css" id="theme">
+        <!--<link rel="stylesheet" href="build/league-gothic.css">-->
+        <link rel="stylesheet" href="league-gothic.css">
         <!--<link rel="stylesheet" href="bower_components/highlightjs/styles/default.css">-->
         <!--<link rel="stylesheet" href="bower_components/highlightjs/styles/railscasts.css">-->
         <!--<link rel="stylesheet" href="bower_components/highlightjs/styles/zenburn.css">-->
-        <link rel="stylesheet" href="build/zenburn.css">
+        <!--<link rel="stylesheet" href="build/zenburn.css">-->
+        <link rel="stylesheet" href="zenburn.css">
 
 
 
@@ -92,7 +96,6 @@
                             <option>19</option>
                             <option>21</option>
                         </datalist>
-                        <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>
                         <br>
                         color: <input class="color" ng-model="color">
                     </div>
@@ -149,41 +152,41 @@
 
                 <section>
                     <h2>Star gallery</h2>
-                        <small>
-                            <!-- Taking stars from a variable in the $scope -->
-                            4 Stars: <drawstars maxstars="4"></drawstars>
-                            3 Stars: <drawstars maxstars="3"></drawstars>
-                            2 Stars: <drawstars maxstars="2"></drawstars>
-                            1 Star: <drawstars maxstars="1"></drawstars>
-                            0 Stars: <drawstars maxstars="0"></drawstars>
-                            <hr>
+                    <small>
+                        <!-- Taking stars from a variable in the $scope -->
+                        4 Stars: <drawstars maxstars="4"></drawstars>
+                        3 Stars: <drawstars maxstars="3"></drawstars>
+                        2 Stars: <drawstars maxstars="2"></drawstars>
+                        1 Star: <drawstars maxstars="1"></drawstars>
+                        0 Stars: <drawstars maxstars="0"></drawstars>
+                        <hr>
 
-                            <!-- Taking stars from a constant value and defining maxstars --> 
-                            4/4 Stars: <drawstars highlightstars="4" maxstars="4"></drawstars>
-                            3/4 Stars: <drawstars highlightstars="3" maxstars="4"></drawstars>
-                            2/4 Stars: <drawstars highlightstars="2" maxstars="4"></drawstars>
-                            1/4 Stars: <drawstars highlightstars="1" maxstars="4"></drawstars>
-                            0/4 Stars: <drawstars highlightstars="0" maxstars="4"></drawstars>
+                        <!-- Taking stars from a constant value and defining maxstars --> 
+                        4/4 Stars: <drawstars highlightstars="4" maxstars="4"></drawstars>
+                        3/4 Stars: <drawstars highlightstars="3" maxstars="4"></drawstars>
+                        2/4 Stars: <drawstars highlightstars="2" maxstars="4"></drawstars>
+                        1/4 Stars: <drawstars highlightstars="1" maxstars="4"></drawstars>
+                        0/4 Stars: <drawstars highlightstars="0" maxstars="4"></drawstars>
 
-                            <hr>
-                            <!-- Trying it out with 5 stars -->
-                            5/5 Stars: <drawstars highlightstars="5" maxstars="5"></drawstars>
-                            4/5 Stars: <drawstars highlightstars="4" maxstars="5"></drawstars>
-                            3/5 Stars: <drawstars highlightstars="3" maxstars="5"></drawstars>
-                            2/5 Stars: <drawstars highlightstars="2" maxstars="5"></drawstars>
-                            1/5 Stars: <drawstars highlightstars="1" maxstars="5"></drawstars>
-                            0/5 Stars: <drawstars highlightstars="0" maxstars="5"></drawstars>
+                        <hr>
+                        <!-- Trying it out with 5 stars -->
+                        5/5 Stars: <drawstars highlightstars="5" maxstars="5"></drawstars>
+                        4/5 Stars: <drawstars highlightstars="4" maxstars="5"></drawstars>
+                        3/5 Stars: <drawstars highlightstars="3" maxstars="5"></drawstars>
+                        2/5 Stars: <drawstars highlightstars="2" maxstars="5"></drawstars>
+                        1/5 Stars: <drawstars highlightstars="1" maxstars="5"></drawstars>
+                        0/5 Stars: <drawstars highlightstars="0" maxstars="5"></drawstars>
 
-                            <hr>
-                            <!-- Trying it with 2 stars -->
-                            2/2 Stars: <drawstars highlightstars="2" maxstars="2"></drawstars>
-                            1/2 Stars: <drawstars highlightstars="1" maxstars="2"></drawstars>
-                            0/2 Stars: <drawstars highlightstars="0" maxstars="2"></drawstars>
+                        <hr>
+                        <!-- Trying it with 2 stars -->
+                        2/2 Stars: <drawstars highlightstars="2" maxstars="2"></drawstars>
+                        1/2 Stars: <drawstars highlightstars="1" maxstars="2"></drawstars>
+                        0/2 Stars: <drawstars highlightstars="0" maxstars="2"></drawstars>
 
-                            <hr>
-                            <!-- wrong but works anyway -->
-                            2/2 Stars: <drawstars highlightstars="4" maxstars="2"></drawstars>
-                        </small>
+                        <hr>
+                        <!-- wrong but works anyway -->
+                        2/2 Stars: <drawstars highlightstars="4" maxstars="2"></drawstars>
+                    </small>
                 </section>
 
                 <section>
@@ -623,7 +626,8 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
 
         <!--        <script src="bower_components/reveal.js/lib/js/head.min.js"></script> 
                 <script src="bower_components/reveal.js/js/reveal.js"></script> -->
-        <script src="build/presentation-min.js"></script>
+        <script src="presentation-min.js"></script>
+<!--        <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>-->
 
         <script>
                         // Full list of configuration options available here:
@@ -667,17 +671,15 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                                         return !!document.querySelector('[data-markdown]');
                                     }},
                                 // Syntax highlight for <code> elements
-                                {src: 'bower_components/highlightjs/highlight.pack.js', async: true, callback: function () {
+                                {src: 'highlight.pack.js', async: true, callback: function () {
                                         hljs.initHighlightingOnLoad();
                                     }},
                                 // Zoom in and out with Alt+click
-                                {src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true},
+                                {src: 'zoom.js', async: true},
                                 // Speaker notes
-                                {src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true},
+                                {src: 'notes.js', async: true},
                                 // Remote control your reveal.js presentation using a touch device
-                                {src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true},
-                                // MathJax
-                                {src: 'bower_components/reveal.js/plugin/math/math.js', async: true}
+                                {src: 'remotes.js', async: true},
                             ]
                         });</script>
 
