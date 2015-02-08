@@ -151,6 +151,105 @@
                 </section>
 
                 <section>
+                    <h2>All Options</h2>
+                    <div ng-controller="AllOptionsController">
+
+                        <drawstars points="{{points}}" maxstars="{{maxstars}}" offcolor="#{{offcolor}}" highlightstars="{{highlightstars}}" hilightColor="#{{highlightcolor}}" radius="{{radius}}" innerradiusfraction="{{innerradiusfraction / 10}}" ></drawstars>
+                        <br>
+                        <small>
+                            <label for="all-slider-points">points: </label>
+                            <input id="all-slider-points" type="range" min="4" max="21"  ng-model='points' list="all-slider-points-ticks">
+                            <datalist id="all-slider-points-ticks">
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>13</option>
+                                <option>15</option>
+                                <option>17</option>
+                                <option>19</option>
+                                <option>21</option>
+                            </datalist>
+                            <br>
+
+                            <label for="all-options-radius">radius: </label>
+                            <input id="all-options-radius" type="range" min="4" max="120" ng-model='radius' list="all-slider-radius-ticks">
+                            <datalist id="all-slider-radius-ticks">
+                                <option>4</option>
+                                <option>6</option>
+                                <option>8</option>
+                                <option>10</option>
+                                <option>12</option>
+                                <option>15</option>
+                                <option>18</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                                <option>50</option>
+                                <option>60</option>
+                                <option>70</option>
+                                <option>80</option>
+                                <option>90</option>
+                                <option>100</option>
+                                <option>110</option>
+                                <option>120</option>
+                            </datalist>
+                            <br>
+
+                            <label for="slider-highlightstars">highlightstars: </label>
+                            <input id="slider-highlightstars" type="range" min="0" max="26"  ng-model='highlightstars' list="highlightstars-ticklist">
+                            <br>
+
+                            <label for="slider-maxstars">maxstars: </label>
+                            <input id="slider-maxstars" type="range" min="1" max="26" ng-model='maxstars' list="slider-stars-ticks">
+                            <datalist id="highlightstars-ticklist">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>3</option>
+                                <option>5</option>
+                                <option>7</option>
+                                <option>9</option>
+                                <option>11</option>
+                                <option>13</option>
+                                <option>15</option>
+                                <option>17</option>
+                                <option>19</option>
+                                <option>21</option>
+                                <option>23</option>
+                                <option>25</option>
+                                <option>27</option>
+                            </datalist>
+                            <br>
+                            
+                            <label for="radiusfraction">innerradiusfraction: </label>
+                            <input id="radiusfraction" type="range" min='1' max="10" ng-model='innerradiusfraction' list="radiusfraction-ticklist">
+                            <datalist id="radiusfraction-ticklist">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </datalist>
+
+                            <br>
+                            highlightcolor: <input class="color" ng-model="highlightcolor">
+                            <br>
+                            offcolor: <input class="color" ng-model="offcolor"><br>
+                        </small>
+                    </div>
+                </section>
+
+
+                <section>
                     <h2>Star gallery</h2>
                     <small>
                         <!-- Taking stars from a variable in the $scope -->
@@ -598,7 +697,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                     <h2>References</h2>
                     <ul>
                         <li><a href="https://egghead.io/series/learn-html5-graphics-and-animation?utm_source=mailchimp&utm_medium=email&utm_campaign=html5-graphics">Egghead.io Video Lesson on Canvas Tag</a></li>
-                        <li><a href="http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/">Original Star Drawing blog post by Programming Thomas</li></a>
+                        <li><a href="http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/">Original Star Drawing blog post by Programming Thomas</a></li>
                     </ul>
                 </section>
 
@@ -627,7 +726,7 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
         <!--        <script src="bower_components/reveal.js/lib/js/head.min.js"></script> 
                 <script src="bower_components/reveal.js/js/reveal.js"></script> -->
         <script src="presentation-min.js"></script>
-<!--        <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>-->
+        <!--        <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>-->
 
         <script>
                         // Full list of configuration options available here:
@@ -700,6 +799,16 @@ function star(ctx, x, y, outerRadius, points, innerRadiusFraction) {
                                         $scope.maxstars = '8';
                                         $scope.highlightcolor = 'FF0000';
                                         $scope.offcolor = 'FFD700';
+                                    }
+                                ])
+                                .controller('AllOptionsController', ['$scope', function Controller($scope) {
+                                        $scope.points = '5';
+                                        $scope.radius = '10';
+                                        $scope.highlightstars = '3';
+                                        $scope.maxstars = '8';
+                                        $scope.highlightcolor = 'FF0000';
+                                        $scope.offcolor = 'FFD700';
+                                        $scope.innerradiusfraction = '5';
                                     }
                                 ])
                                 ;
