@@ -9,9 +9,9 @@ http://richardeigenmann.github.io/DrawStars/presentation.html
 <!DOCTYPE html>
 <html ng-app="drawStarsApp">
 <body>
-    <drawstars highlightstars="3" maxstars="4">&lt;/drawstars>
-    <script src="//ajax.googleapis.com/.../angular.min.js">&lt;/script>
-    <script src="drawStars.js">&lt;/script>
+    <drawstars highlightstars="3" maxstars="4"></drawstars>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.3/angular.min.js"></script>
+    <script src="drawStars.js"></script>
     <script>
         angular.module('drawStarsApp', ['drawStars']);
     </script>
