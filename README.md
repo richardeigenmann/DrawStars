@@ -19,9 +19,9 @@ http://richardeigenmann.github.io/DrawStars/presentation.html
 </html>
 ```
 
-[See thre result live]{http://richardeigenmann.github.io/DrawStars/drawStarsApp.html}
+[See thre result live](http://richardeigenmann.github.io/DrawStars/drawStarsApp.html)
 
-Link to drawStars.js: [http://richardeigenmann.github.io/DrawStars/drawStars.js]{http://richardeigenmann.github.io/DrawStars/drawStars.js}
+Link to drawStars.js: [http://richardeigenmann.github.io/DrawStars/drawStars.js](http://richardeigenmann.github.io/DrawStars/drawStars.js)
 
 
 
