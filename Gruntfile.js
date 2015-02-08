@@ -6,7 +6,7 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, flatten: true, src: ['public_html/presentation.html'], dest: 'public_html/build/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['public_html/drawStars.js'], dest: 'public_html/build/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['public_html/drawStarsApp.js'], dest: 'public_html/build/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['public_html/drawStarsApp.html'], dest: 'public_html/build/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['bower_components/reveal.js/css/theme/league.css'], dest: 'public_html/build/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['bower_components/reveal.js/lib/font/league-gothic/*'], dest: 'public_html/build/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['bower_components/highlightjs/highlight.pack.js'], dest: 'public_html/build/', filter: 'isFile'},
@@ -40,6 +40,17 @@ module.exports = function (grunt) {
                     'public_html/build/presentation-min.js': ['public_html/build/presentation-concat.js']
                 }
             }
+        },
+        htmlmin: {// Task  Doesn't work
+            dist: {// Target
+                options: {// Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {// Dictionary of files
+                    'public_html/build/presentation-min.html': 'public_html/presentation.html' // 'destination': 'source'
+                }
+            }
         }
     });
 
@@ -48,5 +59,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-bower-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.registerTask('default', ['copy', 'bower_concat', 'uglify:bower']);
 }
