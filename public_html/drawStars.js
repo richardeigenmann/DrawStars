@@ -1,9 +1,21 @@
 angular.module('drawStars', [])
         .directive("drawstars", function () {
 
-            function drawVariableSizeStar(ctx, x, y, outerRadius, points, innerRadiusFraction) {
+            /**
+             * This draws a star on the supplied Context2d.
+             * 
+             * @see http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/
+             * 
+             * @param {context} ctx The Canvas Context to draw on
+             * @param {int} x The x coordiantes of the middle
+             * @param {int} y The y coordinates of the middle
+             * @param {int} outerRadius The radius of the outer points
+             * @param {int} innerRadius The radius of the inner points
+             * @param {int} points The number of points for the star
+             * @returns {undefined}
+             */
+            function drawVariableSizeStar(ctx, x, y, outerRadius, innerRadius, points) {
                 var halfAngle = Math.PI / points; // = 2 * PI / 2 * points
-                var innerRadius = outerRadius * innerRadiusFraction;
                 ctx.save();
                 ctx.beginPath();
                 ctx.translate(x, y);
@@ -20,59 +32,41 @@ angular.module('drawStars', [])
 
 
             /**
-             * Originally found this page: http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/
-             * This draws a star using parametrised radius and spike length. I fear that doing all those floating point 
-             * calculations could be really slow so I have "pre-rendered" the calculations into this function for a small star.
-             * @param {type} ctx
-             * @param {type} x
-             * @param {type} y
-             * @returns {undefined}
-             */
-            /*function draw10pxStar(ctx, x, y) {
-                ctx.save();
-                ctx.beginPath();
-                ctx.translate(x, y);
-                ctx.moveTo(0, -10);
-                for (var i = 0; i < 5; i++) {
-                    ctx.rotate(0.6283185307179586);
-                    ctx.lineTo(0, -4.5);
-                    ctx.rotate(0.6283185307179586);
-                    ctx.lineTo(0, -10);
-                }
-                ctx.fill();
-                ctx.restore();
-            }*/
-
-            /**
              * Draws 'maxStars' stars on the supplied 2D context.
-             * Starting from the left the first 'stars' are drawn in the
-             * 'onColor' with the remaining ones drawn in the 'offColor'
-             * @param {type} onStars  number of stars in onColor
-             * @param {type} maxStars total number of stars
-             * @param {type} onColor the color for the onStars
-             * @param {type} offColor the color for the offStars
-             * @param {type} ctx  the 2D context on which to draw
+             * 
+             * Starting from the left the first 'highlightStars' are drawn in the
+             * 'highlightColor' with the remaining ones drawn in the 'offColor'
+             * @param {context} ctx  the 2D context on which to draw
+             * @param {int} points The number of points for the star
+             * @param {int} maxStars total number of stars
+             * @param {string } offColor the color for the offStars. Can be
+             *                 a name like 'red' or a hex color like '#FF0000'
+             * @param {int} highlightStars  number of stars in onColor
+             * @param {string} highlightColor the color for the highlightStars. Can be
+             *                 a name like 'red' or a hex color like '#FF0000'
+             * @param {int} radius The radius of the outer points of the individual stars
+             * @param {float} innerRadiusFraction a float between 0 and 1 to calculate the inner radius
              * @returns {undefined}
              */
-            function drawStars(ctx, onStars, maxStars, onColor, offColor, points, radius) {
+            function drawStars(ctx, points, maxStars, offColor, highlightStars, highlightColor, radius, innerRadiusFraction) {
                 ctx.fillStyle = offColor;
+                var innerRadius = radius * innerRadiusFraction;
+                var y = radius + 1;
 
                 for (var i = maxStars; i > 0; i--) {
-                    if (onStars >= i) {
-                        ctx.fillStyle = onColor;
+                    if (highlightStars >= i) {
+                        ctx.fillStyle = highlightColor;
                     }
-                    //if (points == 5 && radius == 10) {
-                    //  draw10pxStar(ctx, (i - 1) * 20 + 11, 11);
-                    //} else {
-                        drawVariableSizeStar(ctx, ((i - 1) * 2 * radius) + radius + 1, radius + 1, radius, points, 0.5);
-                    //}
+                    var x = ((i - 1) * 2 * radius) + radius + 1;
+                    drawVariableSizeStar(ctx, x, y, radius, innerRadius, points);
                 }
             }
 
+            // the main definition of the directive
             return {
                 restrict: "E",
                 scope: {
-                    onstars: '@stars',
+                    highlightstars: '@highlightstars',
                     maxstars: '@maxstars',
                     points: '@points',
                     radius: '@radius',
@@ -84,7 +78,7 @@ angular.module('drawStars', [])
                     var canvas = element.find('canvas')[0];
                     var ctx = canvas.getContext('2d');
 
-                    scope.$watch('onstars', function () {
+                    scope.$watch('highlightstars', function () {
                         drawThem();
                     });
                     scope.$watch('maxstars', function () {
@@ -102,7 +96,6 @@ angular.module('drawStars', [])
                     scope.$watch('highligtcolor', function () {
                         drawThem();
                     });
-
 
                     function drawThem() {
                         var maximumStars;
@@ -140,11 +133,13 @@ angular.module('drawStars', [])
                             highlightColor = scope.highligtcolor;
                         }
 
+                        // set the CANVAS width and height (not the CSS width and height)
+                        // see https://egghead.io/lessons/javascript-introduction-to-html-canvas-element
                         canvas.width = maximumStars * 2 * radius + 2;
                         canvas.height = radius * 2 + 1;
-                        drawStars(ctx, parseInt(scope.onstars), maximumStars, highlightColor, offColor, points, radius);
-                    };  // drawThem
-
+                        drawStars(ctx, points, maximumStars, offColor, parseInt(scope.highlightstars), highlightColor, radius, 0.5);
+                    }
+                    ;  // closes funtion drawThem
                     drawThem();
                 } // link
             };
