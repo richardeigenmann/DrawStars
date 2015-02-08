@@ -30,7 +30,7 @@ The number of stars to show. An integer between 1 and any reasonable number. Def
 
 ####offcolor
 A string for the color for the non-highlighted stars. Any color the HTML5 context.fillSytle 
-will understand will work. Examples: "red", "gold", "¼FF0000". Defaults to "gold".
+will understand will work. Examples: "red", "gold", "%FF0000". Defaults to "gold".
 
 ####highlightstars
 The number of stars that are highlighted. An integer between 1 and maxstars. (Though it doesn't 
