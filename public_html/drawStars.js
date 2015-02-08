@@ -48,9 +48,8 @@ angular.module('drawStars', [])
              * @param {float} innerRadiusFraction a float between 0 and 1 to calculate the inner radius
              * @returns {undefined}
              */
-            function drawStars(ctx, points, maxStars, offColor, highlightStars, highlightColor, radius, innerRadiusFraction) {
+            function drawStars(ctx, points, maxStars, offColor, highlightStars, highlightColor, radius, innerRadius) {
                 ctx.fillStyle = offColor;
-                var innerRadius = radius * innerRadiusFraction;
                 var y = radius + 1;
 
                 for (var i = maxStars; i > 0; i--) {
@@ -72,6 +71,7 @@ angular.module('drawStars', [])
                     radius: '@radius',
                     offcolor: '@offcolor',
                     highligtcolor: '@hilightcolor',
+                    innerradiusfraction: '@innerradiusfraction',
                 },
                 template: "<canvas></canvas>",
                 link: function (scope, element) {
@@ -94,6 +94,9 @@ angular.module('drawStars', [])
                         drawThem();
                     });
                     scope.$watch('highligtcolor', function () {
+                        drawThem();
+                    });
+                    scope.$watch('innerradiusfraction', function () {
                         drawThem();
                     });
 
@@ -133,11 +136,18 @@ angular.module('drawStars', [])
                             highlightColor = scope.highligtcolor;
                         }
 
+                        var innerRadius;
+                        if (!scope.innerradiusfraction) {
+                            innerRadius = radius * 0.5; // defaults to 0.5 
+                        } else {
+                            innerRadius = radius * parseFloat(scope.innerradiusfraction);
+                        }
+
                         // set the CANVAS width and height (not the CSS width and height)
                         // see https://egghead.io/lessons/javascript-introduction-to-html-canvas-element
                         canvas.width = maximumStars * 2 * radius + 2;
                         canvas.height = radius * 2 + 1;
-                        drawStars(ctx, points, maximumStars, offColor, parseInt(scope.highlightstars), highlightColor, radius, 0.5);
+                        drawStars(ctx, points, maximumStars, offColor, parseInt(scope.highlightstars), highlightColor, radius, innerRadius);
                     }
                     ;  // closes funtion drawThem
                     drawThem();
