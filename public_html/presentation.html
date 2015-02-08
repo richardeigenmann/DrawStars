@@ -15,9 +15,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <link rel="stylesheet" href="build/presentation.css">
-        <!--        <link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">-->
+        <!--<link rel="stylesheet" href="bower_components/reveal.js/css/theme/black.css" id="theme">-->
         <link rel="stylesheet" href="bower_components/reveal.js/css/theme/league.css" id="theme">
         <link rel="stylesheet" href="bower_components/highlightjs/styles/default.css">
+
 
 
         <!-- For syntax highlighting -->
@@ -89,7 +90,7 @@
                         </datalist>
                         <script type="text/javascript" src="bower_components/JSColor/jscolor.js"></script>
                         <br>
-                        Color: <input class="color" ng-model="color">
+                        color: <input class="color" ng-model="color">
                     </div>
                     <div style="display:inline-block; width: 140px; height:140px">
                         <drawstars maxstars="1" points="{{points}}" radius="{{radius}}" offcolor="#{{color}}"></drawstars>
@@ -471,9 +472,9 @@ ctx.restore();
                     </section>
 
 
-                <section>
-                    <h2>The Directive</h2>
-                    <pre><code class="javascript">angular.module('drawStars', [])
+                    <section>
+                        <h2>The Directive</h2>
+                        <pre><code class="javascript">angular.module('drawStars', [])
     .directive("drawstars", function () {
             function drawStar(ctx, x, y) { ... }
             function drawStars(onStars, maxStars, onColor, offColor, ctx) { ... }
@@ -560,7 +561,7 @@ ctx.restore();
         }) // directive
         ; // angular.module
 </code></pre>                    
-                </section>
+                    </section>
                 </section>
 
                 <!-- <section>
@@ -696,6 +697,8 @@ ctx.restore();
 
         </div>
 
+        <!--        <script src="bower_components/reveal.js/lib/js/head.min.js"></script> 
+                <script src="bower_components/reveal.js/js/reveal.js"></script> -->
         <script src="build/presentation-min.js"></script>
 
         <script>
